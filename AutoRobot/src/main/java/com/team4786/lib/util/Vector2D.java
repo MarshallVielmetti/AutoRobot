@@ -60,6 +60,10 @@ public class Vector2D {
         this.y = y;
     }
 
+    public double getMagnitude() {
+        return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+    }
+
     //Methods to facilitate inline vector calculations
     //These functions do NOT modify vectors - only return calculations based on them
 
@@ -79,6 +83,10 @@ public class Vector2D {
      */
     public Vector2D getPower(int power) {
         return new Vector2D(Math.pow(this.getX(), power), Math.pow(this.getY(), power));
+    }
+
+    public Vector2D getSubtract(Vector2D guest) {
+        return new Vector2D(this.getX() - guest.getX(), this.getY() - guest.getY());
     }
 
     /**

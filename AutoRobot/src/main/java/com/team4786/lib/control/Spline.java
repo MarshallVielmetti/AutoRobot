@@ -66,4 +66,27 @@ public class Spline {
         this.waypoints = waypoints;
         this.calculateMarkers();
     }
+
+    /**
+     * Returns a scalar value for the length of the spline
+     * @return double length of spline
+     */
+    public double getSplineLength() {
+        double splineLength = this.markers.get(0).getMagnitude();
+        for (int i = 1; i < this.markers.size(); i++) {
+            splineLength += this.markers.get(i).getSubtract(this.markers.get(i-1)).getMagnitude();
+        }
+
+        return splineLength;
+    }
+
+    public double[] getCumulativeLength() {
+        double[] splineLength = new double[this.markers.size()];
+        splineLength[0] = this.markers.get(0).getMagnitude();
+        for (int i = 1; i < this.markers.size(); i++) {
+            splineLength[i] = splineLength[i - 1] + this.markers.get(i).getSubtract(this.markers.get(i-1)).getMagnitude();
+        }
+
+        return splineLength;
+    }
 }
