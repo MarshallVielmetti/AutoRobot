@@ -21,6 +21,13 @@ interface MotionProfile {
      */
     double queryVelocity(double t);
 
+    /**
+     * Determines a time given a position along the spline
+     * @param p double position along the spline
+     * @return double time
+     */
+    double lookupScalarPosition(double p);
+
 
     /**
      * Returns flattened position along the spline at time t.
@@ -29,5 +36,6 @@ interface MotionProfile {
      */
     double queryAcceleration(double t);
 
+    double[] getTimeProfile();
 
 }
