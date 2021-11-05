@@ -1,0 +1,3 @@
+Each autonomous "mode" is composed of "Actions" and "Paths" to be executed sequentially.
+Actions refer to everything that is not specifically driving a path.
+This is based on 254's organization.

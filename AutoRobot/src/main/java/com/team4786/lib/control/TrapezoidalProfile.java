@@ -150,7 +150,7 @@ public class TrapezoidalProfile implements MotionProfile{
      * @return 1D acceleration along spline curve
      */
     double queryAcceleration(double t) {
-
+        
     }
 
     // END REQUIREMENTS BY INTERFACE
