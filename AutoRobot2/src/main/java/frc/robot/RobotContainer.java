@@ -6,6 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Auto.AutoModeSelector;
 import frc.robot.Auto.Modes.AutoModeBase;
 import frc.robot.commands.ExampleCommand;
@@ -28,6 +30,8 @@ public class RobotContainer {
   private AutoModeBase m_selectedAutoMode;
   private AutoModeSelector m_autoModeSelector;
 
+  private Field2d m_field;
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -35,6 +39,9 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
     m_autoModeSelector = new AutoModeSelector();
+
+    m_field = new Field2d();
+    SmartDashboard.putData(m_field);
   }
 
   /**
