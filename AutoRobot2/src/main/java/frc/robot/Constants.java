@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.geometry.Translation2d;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -17,4 +19,19 @@ package frc.robot;
 public final class Constants {
     public static final double maxAutoVelocity = 15; // Meters per second
     public static final double maxAutoAcceleration = 2; // Meters per second^2
+
+    public static final double maxAutoWheelVelocity = 15; // Meters per second
+    public static final double maxCentripetalAcceleration = 5; // Meters per second^2
+
+    public static final double distanceBetweenWheels = 0.8; // Meters
+
+    // DETERMINED WITH ROBOT CHARACTERIZATION. ROBOT SPECFICIC.
+    public static final double kP = 0.1; // Maybe the same as kS I'm not sure tbh.
+
+    public static final double kS = 0.1;
+    public static final double kV = 0.5;
+    public static final double kA = 0.01;
+
+    public static final double maxVoltage = 10;
+
 }
