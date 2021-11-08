@@ -1,4 +1,4 @@
-package com.team4786.robot.Auto.Paths;
+package com.team4786.robot.Trajectories;
 
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 
