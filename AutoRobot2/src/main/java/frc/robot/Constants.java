@@ -27,11 +27,22 @@ public final class Constants {
 
     // DETERMINED WITH ROBOT CHARACTERIZATION. ROBOT SPECFICIC.
     public static final double kP = 0.1; // Maybe the same as kS I'm not sure tbh.
+    public static final double kPDriveVel = 0.1; // Could honestly be the same as the thing above
 
     public static final double kS = 0.1;
     public static final double kV = 0.5;
     public static final double kA = 0.01;
 
+    // Should be robot agnostic. Defined @
+    // https://docs.wpilib.org/en/stable/docs/software/advanced-controls/trajectories/ramsete.html
+    public static final double kRamseteB = 2.0;
+    public static final double kRamseteZeta = 0.7;
+
     public static final double maxVoltage = 10;
+
+    // https://docs.wpilib.org/en/stable/docs/software/examples-tutorials/trajectory-tutorial/creating-drive-subsystem.html#encoder-accessor-method
+    // Should be 4 times the value reported by the drive characterization tool.
+    // Distance should be measured in meters
+    public static final double kEncoderDistancePerPulse = 0.02;
 
 }

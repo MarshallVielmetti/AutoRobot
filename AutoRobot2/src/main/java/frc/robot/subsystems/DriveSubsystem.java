@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PWMSparkMax;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -12,6 +13,7 @@ import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -49,10 +51,15 @@ public class DriveSubsystem extends SubsystemBase {
     private final DifferentialDriveKinematics m_driveKinematics;
     private final SimpleMotorFeedforward m_feedFoward;
 
+    // Define shaft encoders - not sure if this will stand the test of time.
+    private final Encoder m_leftShaftEncoder = new Encoder(RobotMap.kLeftShaftEncoderPort[0],
+            RobotMap.kLeftShaftEncoderPort[1], RobotMap.kLeftShaftEncoderReversed);
+
+    private final Encoder m_rightShaftEncoder = new Encoder(RobotMap.kRightShaftEncoderPort[0],
+            RobotMap.kRightShaftEncoderPort[1], RobotMap.kRightShaftEncoderReversed);
+
     // The gyro sensor
     private final Gyro m_gyro = new ADXRS450_Gyro();
-
-    private Pose2d m_estimatedPose2d;
 
     // Odometry class for tracking robot pose
     private final DifferentialDriveOdometry m_odometry;
@@ -68,6 +75,9 @@ public class DriveSubsystem extends SubsystemBase {
         m_driveKinematics = new DifferentialDriveKinematics(Constants.distanceBetweenWheels);
         m_feedFoward = new SimpleMotorFeedforward(Constants.kS, Constants.kV, Constants.kA);
 
+        m_leftShaftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
+        m_rightShaftEncoder.setDistancePerPulse(Constants.kEncoderDistancePerPulse);
+
         // resetEncoders();
         m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
 
@@ -76,8 +86,7 @@ public class DriveSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         // TODO
-        // m_odometry.update(m_gyro.getRotation2d(), leftDistanceMeters,
-        // rightDistanceMeters)
+        m_odometry.update(m_gyro.getRotation2d(), m_leftShaftEncoder.getDistance(), m_rightShaftEncoder.getDistance());
     };
 
     @Override
@@ -123,7 +132,17 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     /**
-     * Returns the estimated Pose2D of the robot
+     * Returns the current wheel speeds of the robot.
+     *
+     * @return The current wheel speeds.
+     */
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+        return new DifferentialDriveWheelSpeeds(m_leftShaftEncoder.getRate(), m_rightShaftEncoder.getRate());
+    }
+
+    /**
+     * Returns the estimated Pose2D of the robot not sure if this actually includes
+     * the gyro value... but it should
      * 
      * @return Pose2d
      */
@@ -133,5 +152,17 @@ public class DriveSubsystem extends SubsystemBase {
 
     public static DriveSubsystem getInstance() {
         return DriveSubsystem.m_driveSubsystemInstance;
+    }
+
+    /**
+     * Controls the left and right sides of the drive directly with voltages.
+     *
+     * @param leftVolts  the commanded left output
+     * @param rightVolts the commanded right output
+     */
+    public void tankDriveVolts(double leftVolts, double rightVolts) {
+        m_leftMotors.setVoltage(leftVolts);
+        m_rightMotors.setVoltage(rightVolts); // might need to be inverted
+        m_drive.feed();
     }
 }
