@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotMap;
 import frc.robot.Auto.StartingPosition;
-import frc.robot.Auto.Actions.Waypoints;
+import frc.robot.Auto.Paths.Waypoints;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;

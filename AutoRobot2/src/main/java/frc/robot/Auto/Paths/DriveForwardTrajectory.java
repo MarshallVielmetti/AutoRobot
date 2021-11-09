@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
+import frc.robot.Auto.StartingPosition;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class DriveForwardTrajectory extends TrajectoryBase {
@@ -19,6 +20,16 @@ public class DriveForwardTrajectory extends TrajectoryBase {
         super();
     }
 
+    /**
+     * Use this constructor if this Trajectory is used first Changes which waypoints
+     * it will pass through based on the robot's start position
+     * 
+     * @param startPosition Enum containing where the robot is starting
+     */
+    public DriveForwardTrajectory(StartingPosition startPosition) {
+        super(startPosition);
+    }
+
     @Override
     public TrajectoryContainer buildTrajectoryContainer() {
         this.initialPose = DriveSubsystem.getInstance().getCurrentPose2d(); // Note that even if this is the first
@@ -26,6 +37,11 @@ public class DriveForwardTrajectory extends TrajectoryBase {
                                                                             // defined by the AutoModeBase
 
         return new TrajectoryContainer(this.initialPose, this.interiorPoints, this.endingPose);
+    }
+
+    @Override
+    public TrajectoryContainer buildTrajectoryContainer(StartingPosition startPos) {
+
     }
 
 }
