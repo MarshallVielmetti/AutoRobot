@@ -11,7 +11,7 @@ public class AutoModeSelector {
     // }
 
     enum DesiredAutoMode {
-        DO_NOTHING, SHOOT_TWO, SHOOT_THREE
+        DO_NOTHING, SHOOT_TWO, SHOOT_THREE, DRIVE_TO_GOAL_TO_TRENCH
     }
 
     private StartingPosition m_startPosition = null;
@@ -58,14 +58,14 @@ public class AutoModeSelector {
      */
     public AutoModeBase getAutoMode() {
         switch (this.m_desiredAutoMode) {
-            case DO_NOTHING:
-                return new AutoModeBase();
-            case SHOOT_TWO:
-                return new AutoModeBase();
-            case SHOOT_THREE:
-                return new AutoModeBase();
-            default:
-                return new AutoModeBase();
+        case DO_NOTHING:
+            return new AutoModeBase();
+        case DRIVE_TO_GOAL_TO_TRENCH:
+            return new AutoModeBase();
+        case SHOOT_THREE:
+            return new AutoModeBase();
+        default:
+            return new AutoModeBase();
         }
     }
 }

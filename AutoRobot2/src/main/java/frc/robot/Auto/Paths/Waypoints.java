@@ -1,5 +1,7 @@
 package frc.robot.Auto.Paths;
 
+import javax.swing.TransferHandler.TransferSupport;
+
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.Auto.StartingPosition;
 
@@ -21,11 +23,19 @@ public class Waypoints {
     public static final Translation2d loadingPosition = new Translation2d();
     // To be clear this is the spot right infront of the target
     public static final Translation2d targetPosition = new Translation2d();
+    public static final Translation2d infrontOfTargetPosition = new Translation2d();
+
     public static final Translation2d wofPosition = new Translation2d();
     public static final Translation2d trenchFarPosition = new Translation2d();
     public static final Translation2d trenchClosePosition = new Translation2d();
     public static final Translation2d scoringRightPosition = new Translation2d();
     public static final Translation2d scoringLeftPosition = new Translation2d();
+
+    public static final Translation2d allianceInitiationLeft = new Translation2d();
+    public static final Translation2d allianceInitiationMiddle = new Translation2d();
+    public static final Translation2d allianceInitiationRight = new Translation2d();
+
+    public static final Translation2d infrontOfTrenchAllianceSide = new Translation2d();
 
     public static Translation2d getStartPositionFromEnum(StartingPosition startPos) {
         switch (startPos) {

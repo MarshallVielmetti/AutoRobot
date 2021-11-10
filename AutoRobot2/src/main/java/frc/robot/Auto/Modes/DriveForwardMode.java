@@ -2,7 +2,7 @@ package frc.robot.Auto.Modes;
 
 import frc.robot.Auto.StartingPosition;
 import frc.robot.Auto.Actions.DrivePathCmd;
-import frc.robot.Auto.Paths.DriveForwardTrajectory;
+import frc.robot.Auto.Paths.StartLinetoGoal;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class DriveForwardMode extends AutoModeBase {
@@ -14,7 +14,7 @@ public class DriveForwardMode extends AutoModeBase {
 
     @Override
     public void buildAutoMode() {
-        addCommands(new DrivePathCmd(new DriveForwardTrajectory(super.m_startingPosition)));
+        addCommands(new DrivePathCmd(new StartLinetoGoal(super.m_startingPosition)));
     }
 
 }

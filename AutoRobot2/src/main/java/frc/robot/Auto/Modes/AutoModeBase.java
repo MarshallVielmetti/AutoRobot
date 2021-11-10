@@ -3,6 +3,7 @@ package frc.robot.Auto.Modes;
 import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 // import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -16,7 +17,9 @@ public abstract class AutoModeBase extends SequentialCommandGroup {
 
     public AutoModeBase(StartingPosition startingPosition) {
         this.m_startingPosition = startingPosition;
-        DriveSubsystem.getInstance().setOdometry(getInitialPose());
+        Pose2d startPose = new Pose2d(Waypoints.getStartPositionFromEnum(startingPosition), new Rotation2d(0));
+
+        DriveSubsystem.getInstance().setOdometry(startPose); // Illegal dependency injection
 
         this.buildAutoMode();
     };
@@ -30,23 +33,6 @@ public abstract class AutoModeBase extends SequentialCommandGroup {
 
     protected StartingPosition getStartingPosition() {
         return this.m_startingPosition;
-    }
-
-    private Pose2d getInitialPose() {
-        Translation2d initialPosition;
-        switch (this.m_startingPosition) {
-        case LEFT:
-            initialPosition = Waypoints.leftStartingPosition;
-            break;
-        case MIDDLE:
-            initialPosition = Waypoints.middleStartingPosition;
-            break;
-        case RIGHT:
-            initialPosition = Waypoints.rightStartingPosition;
-            break;
-        default:
-            initialPosition = Waypoints.leftStartingPosition; // so I guess by default, it starts here
-        }
     }
 
 }
