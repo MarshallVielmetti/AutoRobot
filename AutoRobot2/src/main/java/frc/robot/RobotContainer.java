@@ -26,8 +26,9 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  public final DriveSubsystem m_driveSubsystem = new DriveSubsystem(); // This drive subsystem is also stored in
-                                                                       // DriveSubsystem.m_driveSubsystemInstance
+  // This drive subsystem is also stored in
+  // DriveSubsystem.m_driveSubsystemInstance
+  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
 
   private AutoModeBase m_selectedAutoMode;
   private AutoModeSelector m_autoModeSelector;
