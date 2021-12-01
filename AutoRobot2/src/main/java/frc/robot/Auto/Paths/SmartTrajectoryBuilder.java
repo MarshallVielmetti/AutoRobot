@@ -57,7 +57,8 @@ public class SmartTrajectoryBuilder {
 
             return buildThroughTrenchContainer(initialPose2d, endPose2d);
         } else {
-
+            // TODO
+            return null;
         }
     }
 

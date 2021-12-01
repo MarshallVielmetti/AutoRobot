@@ -3,6 +3,7 @@ package frc.robot.Auto;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Auto.Modes.AutoModeBase;
+import frc.robot.Auto.Modes.GoalToTrenchMode;
 
 public class AutoModeSelector {
 
@@ -59,13 +60,16 @@ public class AutoModeSelector {
     public AutoModeBase getAutoMode() {
         switch (this.m_desiredAutoMode) {
         case DO_NOTHING:
-            return new AutoModeBase();
+            // return new AutoModeBase();
+            return null;
         case DRIVE_TO_GOAL_TO_TRENCH:
-            return new AutoModeBase();
+            return new GoalToTrenchMode(m_startPosition);
         case SHOOT_THREE:
-            return new AutoModeBase();
+            // return new AutoModeBase();
+            return null;
         default:
-            return new AutoModeBase();
+            // return new AutoModeBase();
+            return null;
         }
     }
 }
