@@ -34,9 +34,14 @@ public final class Constants {
 
         //TODO - Measure robot
         public static final double kWheelBase = 0.3; //Meters
+        public static final double kWheelRadius = 0.15; //Meters
+        public static final double kGearReduction = 5;
 
         //TODO - Motor Feedforward Constants
         public static final double kS = 0.01;
         public static final double kV = 0.001;
+
+        //Motion Conersion Factors
+        public static final double kDriveVelocityConversionFactor = 4096 * kGearReduction * 2 * kWheelRadius * Math.PI ; //TODO -m/s
     }
 }

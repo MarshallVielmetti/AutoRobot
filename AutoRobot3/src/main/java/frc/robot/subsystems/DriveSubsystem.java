@@ -9,10 +9,12 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.DriveConstants.*;
@@ -56,6 +58,9 @@ public class DriveSubsystem extends SubsystemBase {
 
         m_leftEncoder.setInverted(kLeftEncoderInverted);
         m_rightEncoder.setInverted(kRightEncoderInverted);
+
+        m_leftEncoder.setVelocityConversionFactor(kDriveVelocityConversionFactor);
+        m_rightEncoder.setVelocityConversionFactor(kDriveVelocityConversionFactor);
     }
 
     /**
@@ -68,6 +73,29 @@ public class DriveSubsystem extends SubsystemBase {
         m_leftEncoder.setPosition(0);
         m_rightEncoder.setPosition(0);
     }
+
+    /**
+     * Returns arbitrary feedforward value to achieve a desired velocity
+     * @param desiredVelocity - desired velocity
+     * @return arbitrary feedforwards value
+     */
+    public double getFeedForward(double desiredVelocity) {
+        return m_feedForward.calculate(desiredVelocity);
+    }
+
+    /**
+     * Gets the wheel speeds of the differential drive
+     * @return DifferentialDriveWheelSpeeds
+     */
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+        return new DifferentialDriveWheelSpeeds(m_leftEncoder.getVelocity(), m_rightEncoder.getVelocity());
+    }
+
+    public Pose2d getPose2d() {
+        return m_odometry.getPoseMeters();
+    }
+
+
 
 
 
