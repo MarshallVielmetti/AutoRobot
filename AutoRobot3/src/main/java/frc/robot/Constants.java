@@ -12,4 +12,31 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class Constants {}
+public final class Constants {
+    public static final class DriveConstants {
+
+        //TODO - Input Correct IDs
+        public static final int kLeftMotorID1 = 1;
+        public static final int kLeftMotorID2 = 3;
+        public static final int kLeftMotorID3 = 5;
+
+        public static final int kRightMotorID1 = 2;
+        public static final int kRightMotorID2 = 4;
+        public static final int kRightMotorID3 = 6;
+
+        //TODO - Motor Inversions
+        public static final boolean kLeftInverted = true;
+        public static final boolean kRightInverted = false;
+
+        public static final boolean kLeftEncoderInverted = true;
+        public static final boolean kRightEncoderInverted = false;
+
+
+        //TODO - Measure robot
+        public static final double kWheelBase = 0.3; //Meters
+
+        //TODO - Motor Feedforward Constants
+        public static final double kS = 0.01;
+        public static final double kV = 0.001;
+    }
+}
