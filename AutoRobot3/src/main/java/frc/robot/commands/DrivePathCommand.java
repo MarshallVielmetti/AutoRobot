@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
+import frc.robot.Auto.Paths.PathBase;
 import frc.robot.subsystems.DriveSubsystem;
 
 import static frc.robot.Constants.DriveConstants.*;
@@ -37,9 +38,9 @@ public class DrivePathCommand extends RamseteCommand {
      * 
      * @param driveSubystem
      */
-    public DrivePathCommand(DriveSubsystem driveSubystem, Trajectory trajectory) {
+    public DrivePathCommand(DriveSubsystem driveSubystem, PathBase trajectory) {
         super(
-                trajectory,
+                trajectory.getTrajectory(),
                 driveSubystem::getCurrentPose2d,
                 DrivePathCommand.RAMSETE_CONTROLLER,
                 driveSubystem.getFeedForward(),

@@ -22,6 +22,10 @@ import static frc.robot.Constants.DriveConstants.*;
 
 public class DriveSubsystem extends SubsystemBase {
 
+    // Forbidden progrmaming technique
+    // Used to prevent having to recalculate trajectoryconfigs every time
+    private static DriveSubsystem driveInstance;
+
     // Define & init left motors
     private final CANSparkMax m_motorL1 = new CANSparkMax(kLeftMotorID1, MotorType.kBrushless);
     private final CANSparkMax m_motorL2 = new CANSparkMax(kLeftMotorID2, MotorType.kBrushless);
@@ -56,6 +60,8 @@ public class DriveSubsystem extends SubsystemBase {
     private final boolean debug = true;
 
     public DriveSubsystem() {
+
+        driveInstance = this; // Again, do not reference this
 
         // Set motor and encoder inversions
         m_leftControllerGroup.setInverted(kLeftInverted);
@@ -152,5 +158,17 @@ public class DriveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Left Encoder Position", m_leftEncoder.getPosition());
         SmartDashboard.putNumber("Right Encoder Position", m_rightEncoder.getPosition());
         SmartDashboard.putNumber("Gyro Angle", m_gyro.getAngle());
+    }
+
+    /**
+     * This method is only here for use in the over-designed autonomous setup.
+     * Do not make any calls to this method outside of that - it is against the
+     * programming paradigms that we are trying to follow and makes the code more
+     * difficult to understand
+     * 
+     * @return the DriveSubsystem instance variable
+     */
+    public static DriveSubsystem getInstance() {
+        return driveInstance;
     }
 }

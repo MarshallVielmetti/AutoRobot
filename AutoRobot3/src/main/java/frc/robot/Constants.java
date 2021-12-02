@@ -57,6 +57,7 @@ public final class Constants {
         public static final double kMaxVelocity = 13; // m/s
         public static final double kMaxAcceleration = 2; // m/2^s
         public static final double kMaxCentripetalAcceleration = 2; // m^s^2 / rad?
+        public static final double kMaxVoltage = 9; // Less than nominal 12-13 for consistency
 
         // Motion Conersion Factors
         public static final double kDriveVelocityConversionFactor = 4096 * kGearReduction * 2 * kWheelRadius * Math.PI; // TODO
