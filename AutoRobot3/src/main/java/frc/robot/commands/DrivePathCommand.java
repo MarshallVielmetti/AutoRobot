@@ -9,6 +9,13 @@ import frc.robot.subsystems.DriveSubsystem;
 
 import static frc.robot.Constants.DriveConstants.*;
 
+/**
+ * Extends the RamseteCommand to make passing the information simpler
+ * Don't have to redefine the {@link RamseteController} every time.
+ * Allows for easier interfacing with {@link PathBase} system.
+ * 
+ * @see RamseteCommand
+ */
 public class DrivePathCommand extends RamseteCommand {
 
     /**
@@ -34,11 +41,12 @@ public class DrivePathCommand extends RamseteCommand {
     /**
      * Passes all of the RamseteCommand requirements to the super class
      * Makes reusing this code MUCH simpler.
+     * Primarily for use in complex, compound commands such as autonomous modes
      * TODO - Add breakdown of arguments passed to super.
      * 
      * @param driveSubystem
      */
-    public DrivePathCommand(DriveSubsystem driveSubystem, PathBase trajectory) {
+    public DrivePathCommand(PathBase trajectory, DriveSubsystem driveSubystem) {
         super(
                 trajectory.getTrajectory(),
                 driveSubystem::getCurrentPose2d,

@@ -17,6 +17,12 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    /**
+     * Static class contianing all of the information for the DriveConstants
+     * Basically the only thing that should need to be updated when trying to make
+     * this work on a new robot.
+     * Make use of the DriveCharacterization tool if possible.
+     */
     public static final class DriveConstants {
 
         // TODO - Input Correct IDs

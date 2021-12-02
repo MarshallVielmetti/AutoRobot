@@ -12,6 +12,8 @@ import frc.robot.subsystems.DriveSubsystem;
 
 import static frc.robot.Constants.DriveConstants.*;
 
+import java.util.Arrays;
+
 import java.util.ArrayList;
 
 /**
@@ -52,8 +54,9 @@ public class PathBase {
     /**
      * Constructor
      */
-    public PathBase(Pose2d initialPose, ArrayList<Translation2d> interiorPoints, Pose2d endingPose) {
-        this.m_trajectory = TrajectoryGenerator.generateTrajectory(initialPose, interiorPoints, endingPose,
+    public PathBase(Pose2d initialPose, Translation2d[] interiorPoints, Pose2d endingPose) {
+        this.m_trajectory = TrajectoryGenerator.generateTrajectory(initialPose, Arrays.asList(interiorPoints),
+                endingPose,
                 TRAJECTORY_CONFIG);
     }
 
