@@ -15,7 +15,7 @@ import frc.robot.commands.DrivePathCommand;
  */
 public final class Waypoints {
     // Examples
-    public static final Translation2d W_STARTING_POSITION = new Translation2d(15, 15);
-    public static final Translation2d W_MIDDLE_POSITION = new Translation2d(25, 25);
-    public static final Translation2d W_ENDING_POSITION = new Translation2d(35, 35);
+    public static final Translation2d W_STARTING_POSITION = new Translation2d(0, 0);
+    public static final Translation2d W_MIDDLE_POSITION = new Translation2d(0, 1000);
+    public static final Translation2d W_ENDING_POSITION = new Translation2d(0, 20000);
 }

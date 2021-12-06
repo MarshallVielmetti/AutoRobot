@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -29,26 +30,26 @@ public class DriveSubsystem extends SubsystemBase {
     // Define & init left motors
     private final CANSparkMax m_motorL1 = new CANSparkMax(kLeftMotorID1, MotorType.kBrushless);
     private final CANSparkMax m_motorL2 = new CANSparkMax(kLeftMotorID2, MotorType.kBrushless);
-    private final CANSparkMax m_motorL3 = new CANSparkMax(kLeftMotorID2, MotorType.kBrushless);
+    // private final CANSparkMax m_motorL3 = new CANSparkMax(kLeftMotorID2,
+    // MotorType.kBrushless);
 
     private final CANEncoder m_leftEncoder = m_motorL1.getEncoder();
 
     // Define & init right motors
     private final CANSparkMax m_motorR1 = new CANSparkMax(kRightMotorID1, MotorType.kBrushless);
     private final CANSparkMax m_motorR2 = new CANSparkMax(kRightMotorID2, MotorType.kBrushless);
-    private final CANSparkMax m_motorR3 = new CANSparkMax(kRightMotorID3, MotorType.kBrushless);
+    // private final CANSparkMax m_motorR3 = new CANSparkMax(kRightMotorID3,
+    // MotorType.kBrushless);
 
     private final CANEncoder m_rightEncoder = m_motorR1.getEncoder();
 
     // Define & init speed controller groups for each side
-    private final SpeedControllerGroup m_leftControllerGroup = new SpeedControllerGroup(m_motorL1, m_motorL2,
-            m_motorL3);
+    private final SpeedControllerGroup m_leftControllerGroup = new SpeedControllerGroup(m_motorL1, m_motorL2);
 
-    private final SpeedControllerGroup m_rightControllerGroup = new SpeedControllerGroup(m_motorR1, m_motorR2,
-            m_motorR3);
+    private final SpeedControllerGroup m_rightControllerGroup = new SpeedControllerGroup(m_motorR1, m_motorR2);
 
     // Define & init gyro
-    private final Gyro m_gyro = new ADXRS450_Gyro();
+    private final Gyro m_gyro = new AHRS();
 
     // Define & Initialize Drive Characterizations
     private final DifferentialDrive m_drive = new DifferentialDrive(m_leftControllerGroup, m_rightControllerGroup);
@@ -67,8 +68,8 @@ public class DriveSubsystem extends SubsystemBase {
         m_leftControllerGroup.setInverted(kLeftInverted);
         m_rightControllerGroup.setInverted(kRightInverted);
 
-        m_leftEncoder.setInverted(kLeftEncoderInverted);
-        m_rightEncoder.setInverted(kRightEncoderInverted);
+        // m_leftEncoder.setInverted(kLeftEncoderInverted);
+        // m_rightEncoder.setInverted(kRightEncoderInverted);
 
         m_leftEncoder.setVelocityConversionFactor(kDriveVelocityConversionFactor);
         m_rightEncoder.setVelocityConversionFactor(kDriveVelocityConversionFactor);
@@ -125,6 +126,7 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     public void setOdometry(Pose2d setPose) {
+        zeroAll();
         m_odometry.resetPosition(setPose, setPose.getRotation());
     }
 
@@ -138,6 +140,10 @@ public class DriveSubsystem extends SubsystemBase {
         m_leftControllerGroup.setVoltage(leftVolts);
         m_rightControllerGroup.setVoltage(rightVolts); // might need to be inverted
         m_drive.feed();
+    }
+
+    public void setPose2d(Pose2d pose) {
+        m_odometry.resetPosition(pose, pose.getRotation());
     }
 
     @Override

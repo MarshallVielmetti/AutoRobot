@@ -26,42 +26,55 @@ import java.util.ArrayList;
  */
 public class PathBase {
 
-    private final Trajectory m_trajectory;
+        private final Trajectory m_trajectory;
 
-    private static final DriveSubsystem m_drive = DriveSubsystem.getInstance(); // Forbidden technique
+        private static final DriveSubsystem m_drive = DriveSubsystem.getInstance(); // Forbidden technique
 
-    /**
-     * Define drive controller constraints
-     * Note that these are all static and final which is why
-     * I used the getInstance() call above
-     * Avoids having to spend nay computing resources recalculating this at runtime.
-     * 
-     * @see CentripetalAccelerationConstraint
-     * @see DifferentialDriveKinematicsConstraint
-     * @see DifferentialDriveVoltageConstraint
-     */
-    private static final CentripetalAccelerationConstraint CENTRIPETAL_ACCELERATION_CONSTRAINT = new CentripetalAccelerationConstraint(
-            kMaxCentripetalAcceleration);
-    private static final DifferentialDriveKinematicsConstraint DIFFERENTIAL_DRIVE_KINEMATICS_CONSTRAINT = new DifferentialDriveKinematicsConstraint(
-            m_drive.getDriveKinematics(), kMaxVelocity);
-    private static final DifferentialDriveVoltageConstraint DIFFERENTIAL_DRIVE_VOLTAGE_CONSTRAINT = new DifferentialDriveVoltageConstraint(
-            m_drive.getFeedForward(), m_drive.getDriveKinematics(), kMaxVoltage);
+        /**
+         * Define drive controller constraints
+         * Note that these are all static and final which is why
+         * I used the getInstance() call above
+         * Avoids having to spend nay computing resources recalculating this at runtime.
+         * 
+         * @see CentripetalAccelerationConstraint
+         * @see DifferentialDriveKinematicsConstraint
+         * @see DifferentialDriveVoltageConstraint
+         */
+        private static final CentripetalAccelerationConstraint CENTRIPETAL_ACCELERATION_CONSTRAINT = new CentripetalAccelerationConstraint(
+                        kMaxCentripetalAcceleration);
+        private static final DifferentialDriveKinematicsConstraint DIFFERENTIAL_DRIVE_KINEMATICS_CONSTRAINT = new DifferentialDriveKinematicsConstraint(
+                        m_drive.getDriveKinematics(), kMaxVelocity);
+        private static final DifferentialDriveVoltageConstraint DIFFERENTIAL_DRIVE_VOLTAGE_CONSTRAINT = new DifferentialDriveVoltageConstraint(
+                        m_drive.getFeedForward(), m_drive.getDriveKinematics(), kMaxVoltage);
 
-    private static final TrajectoryConfig TRAJECTORY_CONFIG = new TrajectoryConfig(kMaxVelocity, kMaxAcceleration)
-            .addConstraint(CENTRIPETAL_ACCELERATION_CONSTRAINT).addConstraint(DIFFERENTIAL_DRIVE_KINEMATICS_CONSTRAINT)
-            .addConstraint(DIFFERENTIAL_DRIVE_VOLTAGE_CONSTRAINT);
+        private static final TrajectoryConfig TRAJECTORY_CONFIG = new TrajectoryConfig(kMaxVelocity, kMaxAcceleration)
+                        .addConstraint(CENTRIPETAL_ACCELERATION_CONSTRAINT)
+                        .addConstraint(DIFFERENTIAL_DRIVE_KINEMATICS_CONSTRAINT)
+                        .addConstraint(DIFFERENTIAL_DRIVE_VOLTAGE_CONSTRAINT);
 
-    /**
-     * Constructor
-     */
-    public PathBase(Pose2d initialPose, Translation2d[] interiorPoints, Pose2d endingPose) {
-        this.m_trajectory = TrajectoryGenerator.generateTrajectory(initialPose, Arrays.asList(interiorPoints),
-                endingPose,
-                TRAJECTORY_CONFIG);
-    }
+        private Pose2d m_initialPose2d;
+        private Translation2d[] m_interiorWaypoints;
+        private Pose2d m_endingPose2d;
 
-    public Trajectory getTrajectory() {
-        return this.m_trajectory;
-    }
+        /**
+         * Constructor
+         */
+        public PathBase(Pose2d initialPose, Translation2d[] interiorPoints, Pose2d endingPose) {
+                this.m_initialPose2d = initialPose;
+                this.m_interiorWaypoints = interiorPoints;
+                this.m_endingPose2d = endingPose;
+
+                this.m_trajectory = TrajectoryGenerator.generateTrajectory(initialPose, Arrays.asList(interiorPoints),
+                                endingPose,
+                                TRAJECTORY_CONFIG);
+        }
+
+        public Trajectory getTrajectory() {
+                return this.m_trajectory;
+        }
+
+        public Pose2d getInitialPose2d() {
+                return this.m_initialPose2d;
+        }
 
 }

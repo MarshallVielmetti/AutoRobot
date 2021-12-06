@@ -26,13 +26,13 @@ public final class Constants {
     public static final class DriveConstants {
 
         // TODO - Input Correct IDs
-        public static final int kLeftMotorID1 = 1;
-        public static final int kLeftMotorID2 = 3;
-        public static final int kLeftMotorID3 = 5;
+        public static final int kLeftMotorID1 = 13;
+        public static final int kLeftMotorID2 = 15;
+        // public static final int kLeftMotorID3 = 5;
 
-        public static final int kRightMotorID1 = 2;
-        public static final int kRightMotorID2 = 4;
-        public static final int kRightMotorID3 = 6;
+        public static final int kRightMotorID1 = 14;
+        public static final int kRightMotorID2 = 16;
+        // public static final int kRightMotorID3 = 6;
 
         // TODO - Motor Inversions
         public static final boolean kLeftInverted = true;
@@ -53,7 +53,7 @@ public final class Constants {
         // TODO - Drive PID Constants
         public static final double kP = 0.01;
         public static final double kI = 0.0;
-        public static final double kD = 0.0001;
+        public static final double kD = 0.0;
 
         // RAMSETE Controller C onstants
         public static final double kRamseteB = 2.0;
